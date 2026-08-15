@@ -16,6 +16,6 @@ output "iot_topic_rule_destinations_region" {
 }
 output "iot_topic_rule_destinations_vpc_configuration" {
   description = "Map of vpc_configuration values across all iot_topic_rule_destinations, keyed the same as var.iot_topic_rule_destinations"
-  value       = { for k, v in aws_iot_topic_rule_destination.iot_topic_rule_destinations : k => v.vpc_configuration if v.vpc_configuration != null && length(v.vpc_configuration) > 0 }
+  value       = { for k, v in aws_iot_topic_rule_destination.iot_topic_rule_destinations : k => one(v.vpc_configuration) if v.vpc_configuration != null && length(v.vpc_configuration) > 0 }
 }
 
